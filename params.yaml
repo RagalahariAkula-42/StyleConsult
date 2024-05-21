@@ -1,1 +1,2 @@
-key: val
+input_shape: [250, 250, 3]
+classes: 2
