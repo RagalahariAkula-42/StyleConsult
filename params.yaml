@@ -1,7 +1,8 @@
 input_shape: [250, 250, 3]
 classes: 2
 im_shape: [250, 250]
-BATCH_SIZE: 48
+BATCH_SIZE: 32
 epochs: 5
 steps_per_epoch: 70
 validation_steps: 50
+seed: 10

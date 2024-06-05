@@ -64,7 +64,5 @@ class Training:
 
         self.config.trained_model_path.parent.mkdir(parents=True, exist_ok=True)
 
-        self.save_model(
-            path=self.config.trained_model_path and self.config.trained_model_path_in_use,
-            model=self.model
-        )
+        self.save_model(self.config.trained_model_path, self.model)
+        self.save_model(self.config.trained_model_path_in_use, self.model)
