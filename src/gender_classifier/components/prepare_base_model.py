@@ -6,6 +6,7 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
 from tensorflow.keras import regularizers, optimizers
+from tensorflow.keras.optimizers import RMSprop
 from gender_classifier.entity.config_entity import PrepareBaseModelConfig
 
 class PrepareBaseModel:
@@ -15,6 +16,7 @@ class PrepareBaseModel:
     def get_base_model(self):
         num_classes = self.config.params_classes
         input_shape = self.config.params_input_shape
+        learning_rate = self.config.params_learning_rate
         
         model = Sequential()
         model.add(Conv2D(32, (3, 3), activation='relu', input_shape=input_shape,
@@ -34,6 +36,7 @@ class PrepareBaseModel:
         model.add(Flatten())
         model.add(Dense(256, activation='relu'))
         model.add(Dense(1, activation='sigmoid'))
+        optimizer = RMSprop(learning_rate=learning_rate)
         model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['acc'])
 
         self.save_model(path=self.config.base_model_path, model=model)

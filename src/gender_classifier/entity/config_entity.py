@@ -13,6 +13,7 @@ class DataIngestionConfig:
 class PrepareBaseModelConfig:
     root_dir: Path
     base_model_path: Path
+    params_learning_rate: float
     params_input_shape: list
     params_classes: int
 
