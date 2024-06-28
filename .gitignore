@@ -161,3 +161,11 @@ cython_debug/
 
 # Artifacts
 artifacts/*
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore DVC cache and lock files
+*.dvc
+.dvc/

@@ -1,0 +1,119 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/gender_classifier/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: df75f66bf67ef300e9791497aeae198e
+      size: 566
+    - path: src/gender_classifier/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: 9718b27bf67af46604841fbd9ce8ed23
+      size: 920
+    outs:
+    - path: artifacts/data_ingestion/Training
+      hash: md5
+      md5: e09fe212a66b7602e70b5ae5552863b7.dir
+      size: 96087481
+      nfiles: 18965
+    - path: artifacts/data_ingestion/Validation
+      hash: md5
+      md5: cd319f56fd8958d5965acc1be4a3a14a.dir
+      size: 23898796
+      nfiles: 4743
+  prepare_base_model:
+    cmd: python src/gender_classifier/pipeline/stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: df75f66bf67ef300e9791497aeae198e
+      size: 566
+    - path: src/gender_classifier/pipeline/stage_02_prepare_base_model.py
+      hash: md5
+      md5: 95abd9f3edc59060b740cb8e64f7d556
+      size: 969
+    params:
+      params.yaml:
+        classes: 2
+        input_shape:
+        - 250
+        - 250
+        - 3
+    outs:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: c713723f29adb24b4da1d2781271ff28.dir
+      size: 4428760
+      nfiles: 1
+  training:
+    cmd: python src/gender_classifier/pipeline/stage_03_model_training.py
+    deps:
+    - path: artifacts/data_ingestion/Training
+      hash: md5
+      md5: e09fe212a66b7602e70b5ae5552863b7.dir
+      size: 96087481
+      nfiles: 18965
+    - path: artifacts/data_ingestion/Validation
+      hash: md5
+      md5: cd319f56fd8958d5965acc1be4a3a14a.dir
+      size: 23898796
+      nfiles: 4743
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: c713723f29adb24b4da1d2781271ff28.dir
+      size: 4428760
+      nfiles: 1
+    - path: config/config.yaml
+      hash: md5
+      md5: df75f66bf67ef300e9791497aeae198e
+      size: 566
+    - path: src/gender_classifier/pipeline/stage_03_model_training.py
+      hash: md5
+      md5: 2ec848c594fcced2a6b4c92790caf520
+      size: 925
+    params:
+      params.yaml:
+        BATCH_SIZE: 32
+        LEARNING_RATE: 0.01
+        epochs: 10
+        im_shape:
+        - 250
+        - 250
+    outs:
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 1ccd097da008b8e8e9c5f6349df4cfd3
+      size: 8831832
+  evaluation:
+    cmd: python src/gender_classifier/pipeline/stage_04_model_evaluation.py
+    deps:
+    - path: artifacts/data_ingestion/Validation
+      hash: md5
+      md5: cd319f56fd8958d5965acc1be4a3a14a.dir
+      size: 23898796
+      nfiles: 4743
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 1ccd097da008b8e8e9c5f6349df4cfd3
+      size: 8831832
+    - path: config/config.yaml
+      hash: md5
+      md5: df75f66bf67ef300e9791497aeae198e
+      size: 566
+    - path: src/gender_classifier/pipeline/stage_04_model_evaluation.py
+      hash: md5
+      md5: 51d274cdc8dba6442b5dd2196fb22149
+      size: 947
+    params:
+      params.yaml:
+        BATCH_SIZE: 32
+        im_shape:
+        - 250
+        - 250
+        seed: 10
+    outs:
+    - path: scores.json
+      hash: md5
+      md5: 87b01df10989cbb2511a7e9e49d886aa
+      size: 72
