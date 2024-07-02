@@ -1,23 +1,21 @@
-import numpy as np
+import os
 import cv2
 import dlib
+import numpy as np
 from sklearn.cluster import KMeans
 import math
-import bz2
-import os
+from urllib import request as urllib_request
 from src.gender_classifier import logger
-from math import floor
 
 def download_file(url, extract_to):
-    import urllib
     # Create the directory if it doesn't exist
     os.makedirs(os.path.dirname(extract_to), exist_ok=True)
     # Download the file
-    urllib.request.urlretrieve(url, extract_to)
+    urllib_request.urlretrieve(url, extract_to)
 
 def detect_face_shape(image):
-    face_cascade_path = r".\faceshape_req\haarcascade_frontalface_default.xml"
-    predictor_path = r".\faceshape_req\shape_predictor_68_face_landmarks.dat"
+    face_cascade_path = "./faceshape_req/haarcascade_frontalface_default.xml"
+    predictor_path = "./faceshape_req/shape_predictor_68_face_landmarks.dat"
 
     # If you haven't downloaded and extracted the predictor file yet:
     if not os.path.exists(predictor_path):
@@ -25,6 +23,7 @@ def detect_face_shape(image):
 
     if not os.path.exists(face_cascade_path):
         download_file('https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml', face_cascade_path)
+
     # Create the haar cascade for detecting face
     faceCascade = cv2.CascadeClassifier(face_cascade_path)
 
@@ -36,7 +35,7 @@ def detect_face_shape(image):
     if len(image.shape) == 3:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     else:
-        logger.info("Error: Invalid number of channels in input image i.e ",image.shape)
+        logger.info("Error: Invalid number of channels in input image i.e ", image.shape)
 
     # Apply a Gaussian blur with a 3 x 3 kernel to help remove high frequency noise
     gauss = cv2.GaussianBlur(gray, (3, 3), 0)
@@ -128,7 +127,7 @@ def detect_face_shape(image):
         angle1 = math.atan2(landmarks[5, 1] - landmarks[3, 1], landmarks[5, 0] - landmarks[3, 0])
         angle2 = math.atan2(landmarks[13, 1] - landmarks[15, 1], landmarks[13, 0] - landmarks[15, 0])
         angle_difference = abs(math.degrees(angle1 - angle2))
-        
+
         for i in range(1):
             if ovalsimilarity <= 30 and similarity <= 40:
                 if similarity < 20 and angle_difference > 20:
