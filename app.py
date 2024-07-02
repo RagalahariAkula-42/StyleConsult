@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 import os
 from flask_cors import CORS, cross_origin
-from gender_classifier.pipeline.prediction import PredictionPipeline
-from gender_classifier.utils.common import decodeImage
+from src.gender_classifier.pipeline.prediction import PredictionPipeline
+from src.gender_classifier.utils.common import decodeImage
 from PIL import ImageFile
 import logging
 

@@ -1,6 +1,6 @@
-from gender_classifier.config.configuration import ConfigurationManager
-from gender_classifier.components.model_training import Training
-from gender_classifier import logger
+from src.gender_classifier.config.configuration import ConfigurationManager
+from src.gender_classifier.components.model_training import Training
+from src.gender_classifier import logger
 
 
 STAGE_NAME = "Training"

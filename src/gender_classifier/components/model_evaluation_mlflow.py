@@ -3,8 +3,8 @@ from pathlib import Path
 import mlflow
 import mlflow.keras
 from urllib.parse import urlparse
-from gender_classifier.entity.config_entity import EvaluationConfig
-from gender_classifier.utils.common import read_yaml, create_directories,save_json
+from src.gender_classifier.entity.config_entity import EvaluationConfig
+from src.gender_classifier.utils.common import read_yaml, create_directories,save_json
 import dagshub
 
 class Evaluation:

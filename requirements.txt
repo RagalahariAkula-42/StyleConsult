@@ -1,4 +1,4 @@
-tensorflow==2.12.0
+tensorflow>=2.12.0
 opencv-python
 dagshub
 gunicorn
@@ -22,4 +22,3 @@ scipy
 Flask
 Flask-Cors
 gdown
--e .

@@ -7,7 +7,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
 from tensorflow.keras import regularizers, optimizers
 from tensorflow.keras.optimizers import RMSprop
-from gender_classifier.entity.config_entity import PrepareBaseModelConfig
+from src.gender_classifier.entity.config_entity import PrepareBaseModelConfig
 
 class PrepareBaseModel:
     def __init__(self, config):

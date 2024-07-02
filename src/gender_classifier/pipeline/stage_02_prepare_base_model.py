@@ -1,6 +1,6 @@
-from gender_classifier.config.configuration import ConfigurationManager
-from gender_classifier.components.prepare_base_model import PrepareBaseModel
-from gender_classifier import logger
+from src.gender_classifier.config.configuration import ConfigurationManager
+from src.gender_classifier.components.prepare_base_model import PrepareBaseModel
+from src.gender_classifier import logger
 
 STAGE_NAME = "Prepare base model"
 

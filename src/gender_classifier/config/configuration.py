@@ -1,7 +1,7 @@
 from gender_classifier.constants import *
 import os
-from gender_classifier.utils.common import read_yaml, create_directories
-from gender_classifier.entity.config_entity import (DataIngestionConfig,
+from src.gender_classifier.utils.common import read_yaml, create_directories
+from src.gender_classifier.entity.config_entity import (DataIngestionConfig,
                                                     PrepareBaseModelConfig,
                                                     TrainingConfig,
                                                     EvaluationConfig)

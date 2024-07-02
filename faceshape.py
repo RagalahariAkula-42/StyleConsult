@@ -5,7 +5,7 @@ from sklearn.cluster import KMeans
 import math
 import bz2
 import os
-from gender_classifier import logger
+from src.gender_classifier import logger
 from math import floor
 
 def download_file(url, extract_to):
@@ -16,8 +16,8 @@ def download_file(url, extract_to):
     urllib.request.urlretrieve(url, extract_to)
 
 def detect_face_shape(image):
-    face_cascade_path = r"D:\StyleConsult\faceshape_req\haarcascade_frontalface_default.xml"
-    predictor_path = r"D:\StyleConsult\faceshape_req\shape_predictor_68_face_landmarks.dat"
+    face_cascade_path = r".\faceshape_req\haarcascade_frontalface_default.xml"
+    predictor_path = r".\faceshape_req\shape_predictor_68_face_landmarks.dat"
 
     # If you haven't downloaded and extracted the predictor file yet:
     if not os.path.exists(predictor_path):

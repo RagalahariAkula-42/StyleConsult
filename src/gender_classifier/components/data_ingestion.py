@@ -1,9 +1,9 @@
 import os
 import zipfile
 import gdown
-from gender_classifier import logger
-from gender_classifier.utils.common import get_size
-from gender_classifier.entity.config_entity import DataIngestionConfig
+from src.gender_classifier import logger
+from src.gender_classifier.utils.common import get_size
+from src.gender_classifier.entity.config_entity import DataIngestionConfig
 class DataIngestion:
     def __init__(self, config: DataIngestionConfig):
         self.config = config
